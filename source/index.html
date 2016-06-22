@@ -19,7 +19,7 @@
   <body>
 
     <!-- Board -->
-    <div id="board" class="middle">
+    <div id="board" class="middle noselect">
 
       <!-- Buttons -->
       <div id="board-buttons">
@@ -33,6 +33,9 @@
         </div>
       </div>
 
+      <!-- Mask to prevent button press -->
+      <div id="board-mask"></div>
+
       <!-- Control Panel -->
       <div id="controls-container" class="middle"></div>
       <div id="control-panel" class="middle">
@@ -41,7 +44,7 @@
         <div id="title">Simon</div>
 
         <!-- LCD -->
-        <div><button id="lcd">00</button></div>
+        <div><button id="lcd">--</button></div>
 
         <!-- Buttons -->
         <div>
