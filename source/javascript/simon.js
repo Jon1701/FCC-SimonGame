@@ -27,11 +27,50 @@ $(document).ready(function() {
     }
   }
 
+  // shorthand functions for debugging.
   gen = function() {
     generateSequence();
-  }
+  };
   play = function() {
     playSequence();
+  };
+  blink = function(x) {
+    blinkLCD(x);
+  }
+
+
+  blinkLCD = function(text) {
+
+    var actions = function() {
+
+      // Create a deferred sequence of actions.
+      var deferred = $.Deferred();
+
+      // Set lcd to value of text.
+      setTimeout(function() { $("#lcd").text(text); }, 700);
+      setTimeout(function() { $("#lcd").text("--"); }, 1400);
+      setTimeout(function() { $("#lcd").text(text); }, 2100);
+      setTimeout(function() { $("#lcd").text("--"); }, 2800);
+      setTimeout(function() {
+
+        // Show current round number.
+        $("#lcd").text(currentRound);
+
+        // Deferred actions are done.
+        deferred.resolve();
+      }, 3500);
+
+      // Return sequence.
+      return deferred.promise();
+    }
+
+    // Execute actions.
+    var promise = actions();
+
+    // When actions are done, run this function.
+    promise.done(function() {  });
+
+
   }
 
   generateSequence = function() {
@@ -60,6 +99,9 @@ $(document).ready(function() {
   }// end generateSequence().
 
   playSequence = function() {
+
+    // Prevent button presses.
+    showMask();
 
     // Create an array (queue) of promises.
     //
@@ -96,7 +138,12 @@ $(document).ready(function() {
     })// end deffereds;
 
     // Wait for array of promises to finish.
-    $.when.apply($, deferreds).then(function() {console.log("animation done")});
+    $.when.apply($, deferreds).then(function() {
+
+      // Allow button presses.
+      hideMask();
+
+    });
 
   }
 
