@@ -1,6 +1,5 @@
-
 ////////////////////////////////////////////////////////////////////////////////
-// Button Rounded Corners
+// Game Button Rounded Corners
 ////////////////////////////////////////////////////////////////////////////////
 
 #btn-green { border-radius: 100% 0 0 0; };
@@ -9,7 +8,7 @@
 #btn-blue { border-radius: 0 0 100% 0; }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Button Inactive Colour
+// Game Button Inactive Colour
 ////////////////////////////////////////////////////////////////////////////////
 
 .btn-green-inactive { background-color: $colour-green-inactive; };
@@ -18,10 +17,19 @@
 .btn-blue-inactive { background-color: $colour-blue-inactive; }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Button Active Colour
+// Game Button Active Colour
 ////////////////////////////////////////////////////////////////////////////////
 
 .btn-green-active { background-color: $colour-green-active; };
 .btn-red-active { background-color: $colour-red-active; };
 .btn-yellow-active { background-color: $colour-yellow-active; };
 .btn-blue-active {background-color: $colour-blue-active; };
+
+////////////////////////////////////////////////////////////////////////////////
+// Indicator buttons for Power/Start and Strict Mode.
+////////////////////////////////////////////////////////////////////////////////
+
+.indicator-red-off { color: $colour-red-inactive; };
+.indicator-red-on { color: $colour-red-active; };
+.indicator-yellow-off { color: $colour-yellow-inactive; };
+.indicator-yellow-on { color: $colour-yellow-active; };

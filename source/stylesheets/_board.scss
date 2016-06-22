@@ -1,18 +1,6 @@
-// Colours.
-$colour-green-inactive: #00A74A;
-$colour-red-inactive: #9F0F17;
-$colour-yellow-inactive: #CCA707;
-$colour-blue-inactive: #094A8F;
-$colour-green-active: #13FF7C;
-$colour-red-active: #FF4C4C;
-$colour-yellow-active: #FED93F;
-$colour-blue-active: #1C8CFF;
-
-.indicator-red-off { color: $colour-red-inactive; };
-.indicator-red-on { color: $colour-red-active; };
-.indicator-yellow-off { color: $colour-yellow-inactive; };
-.indicator-yellow-on { color: $colour-yellow-active; };
-
+////////////////////////////////////////////////////////////////////////////////
+// Move element to center of the screen.
+////////////////////////////////////////////////////////////////////////////////
 .middle {
   position: fixed;
   top: 50%;
@@ -20,53 +8,67 @@ $colour-blue-active: #1C8CFF;
   transform: translate(-50%, -50%);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// Disable Text Selection.
+////////////////////////////////////////////////////////////////////////////////
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Game Board
+////////////////////////////////////////////////////////////////////////////////
 #board {
 
+  // Dimensions
   width: 800px;
   height: 800px;
 
+  // Center horizonally on page.
   margin: 0 auto;
 
+  // RGBY Button size.
   .btn {
     display: table-cell;
     border: solid 5px #333333;
 
+    // Dimensions.
     width: 400px;
     height: 400px;
   }
 
+  // Container for Control Panel.
   #controls-container {
+
+    // Dimensions.
     width: 425px;
     height: 425px;
-    background-color: white;
 
+    // Colours.
+    background-color: white;
     border: solid 10px #333333;
     border-radius: 100%;
+
   }
 
-  #board-mask {
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-
-    background-color: rgba(33,33,33,0.25);
-  }
-
+  // Control Panel
   #control-panel {
 
+    // Align center.
     text-align: center;
 
-    #title {
-      font-size: 3em;
-    }
+    // Game Name.
+    #title { font-size: 3em; }
 
+    // LCD Display.
     #lcd {
       background-color: white;
-
       border: solid 4px #333333;
 
       width: 125px;
@@ -74,9 +76,9 @@ $colour-blue-active: #1C8CFF;
       font-family: Courier, monospace;
       font-size: 3em;
       color: black;
-
     }
 
+    // Control Panel Start/Strict Buttons.
     #btn-start, #btn-strict {
       background-color: transparent;
 
@@ -86,15 +88,28 @@ $colour-blue-active: #1C8CFF;
       width: 100px;
       height: 125px;
 
+      // Button Text Font.
       font-family: Verdana;
       font-size: 2em;
       color: black;
 
-      span {
-        font-size: 2em;
-      }
+      // Icon Size.
+      span { font-size: 2em; };
 
     }
 
+    // Game Board Mask
+    #board-mask {
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 100%;
+
+      border-radius: 100%;
+      background-color: rgba(33,33,33, 0);
+    }
   }
 }
