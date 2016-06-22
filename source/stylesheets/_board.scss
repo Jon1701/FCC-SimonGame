@@ -26,7 +26,6 @@ $colour-blue-active: #1C8CFF;
   height: 800px;
 
   margin: 0 auto;
-  border: solid 1px black;
 
   .btn {
     display: table-cell;
@@ -43,6 +42,18 @@ $colour-blue-active: #1C8CFF;
 
     border: solid 10px #333333;
     border-radius: 100%;
+  }
+
+  #board-mask {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(33,33,33,0.25);
   }
 
   #control-panel {
@@ -72,11 +83,15 @@ $colour-blue-active: #1C8CFF;
       margin: 0;
       padding: 0;
       width: 100px;
-      height: 100px;
+      height: 125px;
 
       font-family: Verdana;
       font-size: 2em;
       color: black;
+
+      span {
+        font-size: 2em;
+      }
 
     }
 
