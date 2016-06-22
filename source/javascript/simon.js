@@ -214,11 +214,11 @@ $(document).ready(function() {
       hideMask();
 
       // Generate sequence.
-      generateSequence();
+      //generateSequence();
 
       // Play back sequence.
-      playSequence();
-      
+      //playSequence();
+
     }
   });
 
@@ -246,9 +246,56 @@ $(document).ready(function() {
     }
   });
 
+  //////////////////////////////////////////////////////////////////////////////
+  // Board Button Events
+  //////////////////////////////////////////////////////////////////////////////
 
+  var recordPattern = function() {
+    $(".btn").on("click", function() {
 
+      // A sequence of buttion animations to be performed.
+      var btnAnimations = function(btn, colour) {
 
+        // Create a deferred sequence of actions.
+        var deferred = $.Deferred();
+
+        // Set button to active.
+        setTimeout(function() {
+
+          //Add its appropriate active class.
+          $(btn).addClass("btn-" + colour + "-active");
+
+        }, 0);
+
+        // Set button to inactive.
+        setTimeout(function() {
+
+          // Remove its appropriate active class.
+          $(btn).removeClass("btn-" + colour + "-active");
+
+          // Deferred actions are done.
+          deferred.resolve();
+        }, 600);
+
+        // Return sequence.
+        return deferred.promise();
+      }
+
+      // Get id of the button pressed.
+      var id = $(this).attr("id");
+
+      // Get the colour of the button pressed.
+      var colour = id.split("-").slice(-1)[0];
+
+      // Execute animations.
+      var promise = btnAnimations(this, colour);
+
+      // When actions are done, run this function.
+      promise.done(function() {
+        console.log("button animation done");
+      });
+    })
+  };
 
 
 
