@@ -18,6 +18,12 @@ var modulesPath = "./node_modules/";
 // Tasks
 ////////////////////////////////////////////////////////////////////////////////
 
+// Move images.
+gulp.task("images", function() {
+  gulp.src(srcPath + "images/**/*")
+    .pipe(gulp.dest(destPath + "images/"));
+});
+
 // Move JavaScript.
 gulp.task("javascript", function() {
   gulp.src(srcPath + "javascript/**/*")
@@ -63,6 +69,7 @@ gulp.task("webserver", function() {
 
 // Watch task
 gulp.task("watch", function() {
+  gulp.watch(srcPath + "images/**/*", ["images"]); // JavaScript.
   gulp.watch(srcPath + "javascript/**/*", ["javascript"]); // JavaScript.
   gulp.watch(srcPath + "stylesheets/**/*.scss", ["stylesheets"]); // SASS Main.
   gulp.watch(srcPath + "stylesheets/**/_*.scss", ["stylesheets"]); // SASS Partials.
@@ -72,4 +79,4 @@ gulp.task("watch", function() {
 ////////////////////////////////////////////////////////////////////////////////
 // Default Task.
 ////////////////////////////////////////////////////////////////////////////////
-gulp.task("default", ["javascript", "stylesheets", "html", "components", "watch", "webserver"]);
+gulp.task("default", ["images", "javascript", "stylesheets", "html", "components", "watch", "webserver"]);
