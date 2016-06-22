@@ -67,6 +67,9 @@ $(document).ready(function() {
   blink = function(x) {
     blinkLCD(x);
   }
+  record = function() {
+    recordPattern();
+  }
 
   //////////////////////////////////////////////////////////////////////////////
   // Performs a blink animation on the LCD with a given string of text.
