@@ -27,6 +27,13 @@ $(document).ready(function() {
     }
   }
 
+  gen = function() {
+    generateSequence();
+  }
+  play = function() {
+    playSequence();
+  }
+
   generateSequence = function() {
 
     // Clear existing sequences.
@@ -54,14 +61,42 @@ $(document).ready(function() {
 
   playSequence = function() {
 
-    // Iterate through the sequence.
-    for (var i=0; i<computerSequence.length; i++) {
+    // Create an array (queue) of promises.
+    //
+    var deferreds = $.map(computerSequence, function(value, index) {
 
-      // Current element.
-      var color = computerSequence[i];
+      // Get the current colour.
+      var colour = value;
 
-      $("#btn-" + color).addClass("btn-" + color + "-active");
-    }
+      // Create one promise.
+      var promise = $.Deferred();
+
+      // Button active.
+      setTimeout(function() {
+
+        // Sets appropriate active class according to its colour.
+        $("#btn-" + colour).addClass("btn-" + colour + "-active");
+
+      }, (index+1)*1000 + 1000*index);
+
+      // Button inactive.
+      setTimeout(function() {
+
+        // Sets appropriate inactive class according to its colour.
+        $("#btn-" + colour).removeClass("btn-" + colour + "-active");
+
+        // Resolve this promise.
+        promise.resolve();
+
+      }, (index+1)*2000);
+
+      // Return the promise (queue it up)
+      return promise;
+
+    })// end deffereds;
+
+    // Wait for array of promises to finish.
+    $.when.apply($, deferreds).then(function() {console.log("animation done")});
 
   }
 
