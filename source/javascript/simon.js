@@ -81,7 +81,7 @@ $(document).ready(function() {
   //////////////////////////////////////////////////////////////////////////////
   // Performs a blink animation on the LCD with a given string of text.
   //////////////////////////////////////////////////////////////////////////////
-  var blinkLCD = function(text) {
+  var blinkLCD = function(text, f) {
 
     // A sequence of actions to be performed.
     var actions = function() {
@@ -111,9 +111,7 @@ $(document).ready(function() {
     var promise = actions();
 
     // When actions are done, run this function.
-    promise.done(function() {
-      // Not implemented.
-    });
+    promise.done(f);
   }// end blinkLCD().
 
   //////////////////////////////////////////////////////////////////////////////
@@ -146,6 +144,7 @@ $(document).ready(function() {
       computerSequence.push(item);
 
     }// end random selection.
+    console.log("computer: " + computerSequence);
   }// end generateSequence().
 
   //////////////////////////////////////////////////////////////////////////////
@@ -171,7 +170,7 @@ $(document).ready(function() {
         // Sets appropriate active class according to its colour.
         $("#btn-" + colour).addClass("btn-" + colour + "-active");
 
-      }, (index+1)*1000 + 1000*index);
+      }, (index+1)*1200 + 1000*index);
 
       // Button inactive.
       setTimeout(function() {
@@ -182,7 +181,7 @@ $(document).ready(function() {
         // Resolve this promise.
         promise.resolve();
 
-      }, (index+1)*2000);
+      }, (index+1)*2200);
 
       // Return the action (queue it up)
       return promise;
@@ -194,9 +193,6 @@ $(document).ready(function() {
 
       // Allow button presses.
       hideMask();
-
-      // Allow recording user pattern.
-      recordPattern();
 
     });
   }// end playSequence().
@@ -235,6 +231,8 @@ $(document).ready(function() {
       // Play back sequence.
       playSequence();
 
+      recordPattern();
+
     }
   });
 
@@ -267,6 +265,7 @@ $(document).ready(function() {
   //////////////////////////////////////////////////////////////////////////////
 
   var recordPattern = function() {
+
     $(".btn").on("click", function() {
 
       // A sequence of buttion animations to be performed.
@@ -291,12 +290,11 @@ $(document).ready(function() {
 
           // Deferred actions are done.
           deferred.resolve();
-        }, 600);
+        }, 450);
 
         // Return sequence.
         return deferred.promise();
       } // end button animations.
-
 
       // Checks to see if two arrays have the same elements.
       var arraysEqual = function(arr1, arr2) {
@@ -316,9 +314,10 @@ $(document).ready(function() {
       // Get the colour of the button pressed.
       var colour = id.split("-").slice(-1)[0];
 
+      // Animate the button pressed.
       // Add the colour to the userSequence array.
+      btnAnimations(this, colour);
       userSequence.push(colour);
-      console.log(userSequence);
 
       // Logic to check user sequence.
       //
@@ -327,56 +326,82 @@ $(document).ready(function() {
       //  a) if Strict Mode is disabled, the user is given a chance to try again.
       //  b) if Strict Mode is enabled, the user is not given a chance to try
       //     again, and must start from the very beginning (round 1).
-      if (arraysEqual(computerSequence, userSequence)) {
-        console.log("both sequences are the same");
-      } else {
-        console.log("both sequences not the same");
-      }
-
-      /*
-      // Want to record what buttons the user presses.
       //
-      // Keep accepting button presses until userSequence array length is same
-      // as the current round number.
-      if (userSequence.length != currentRound) {
+      // First, check to see if both patterns have the same length.
+      //    If the lengths are the same, check if the sequences are the same.
+      //    If they are, go to next round, if not, continue/restart depending on
+      //    Strict mode.
+      //
+      //    If the lengths are not the same, keep adding colours to userSequence.
+      if (computerSequence.length === userSequence.length) {
 
-        // Add the colour to the userSequence array.
-        userSequence.push(colour);
-        console.log(userSequence);
+        if (arraysEqual(computerSequence, userSequence)) {
 
-        // Execute animations.
-        var promise = btnAnimations(this, colour);
+          // Both sequences are the same, the user is allowed to continue to
+          // next round.
 
-        // When actions are done, run this function.
-        promise.done();
+          // Show the mask.
+          showMask();
 
-        if (userSequence.length === currentRound) {
-          console.log(userSequence);
-        }
+          // New sequence.
+          generateSequence();
 
-      } else {
-        console.log("more choices than generated");
-      }
-      */
+          // Play sequence.
+          playSequence();
 
+        } else {
 
+          // Both sequences are incorrect.
 
+          // Check if Strict Mode is enabled.
+          if (strict) {
 
+            // If Strict Mode is enabled, clear their sequence, and start from
+            // the very beginning.
 
-    })
+            // Prevent button press.
+            showMask();
+
+            // Clear user sequence.
+            userSequence = [];
+
+            // Set current round to 0.
+            currentRound = 0;
+
+            // Blink LCD and restart.
+            blinkLCD("!!", function() {
+              // Generate sequence.
+              generateSequence();
+
+              // Play back sequence.
+              playSequence();
+            });
+
+          } else {
+
+            // If Strict Mode is not enabled, give user another chance to
+            // enter their sequence.
+
+            // Prevent button press
+            showMask();
+
+            // Clear user sequence.
+            userSequence = [];
+
+            // Blink LCD, allow user input after blinking is done.
+            blinkLCD("!!", hideMask);
+
+          }// end Strict Mode check.
+        }// end sequence comparison.
+      }// end sequence length check.
+    }) // end button onclick.
   };
 
-
-
-
-
-
-
   // Global variables.
-  power = false;
-  strict = false;
-  computerSequence = [];
-  userSequence = [];
-  currentRound = 0;
+  var power = false;
+  var strict = false;
+  var computerSequence = [];
+  var userSequence = [];
+  var currentRound = 0;
 
 });
