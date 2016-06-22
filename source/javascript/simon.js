@@ -212,6 +212,13 @@ $(document).ready(function() {
 
       // Allow button press.
       hideMask();
+
+      // Generate sequence.
+      generateSequence();
+
+      // Play back sequence.
+      playSequence();
+      
     }
   });
 
