@@ -48,10 +48,22 @@ $(document).ready(function() {
 
       // Add to computerSequence.
       computerSequence.push(item);
-      
+
     }// end random selection.
   }// end generateSequence().
 
+  playSequence = function() {
+
+    // Iterate through the sequence.
+    for (var i=0; i<computerSequence.length; i++) {
+
+      // Current element.
+      var color = computerSequence[i];
+
+      $("#btn-" + color).addClass("btn-" + color + "-active");
+    }
+
+  }
 
   //////////////////////////////////////////////////////////////////////////////
   // Toggles the start button indicator and internal power state.
