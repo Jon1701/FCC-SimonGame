@@ -18,11 +18,48 @@
 
   <body>
 
-    <!-- Start Game Board -->
-    <div id="board">
+    <!-- Board -->
+    <div id="board" class="middle">
 
+      <!-- Buttons -->
+      <div id="board-buttons">
+        <div>
+          <div id="btn-green" class="btn btn-green-inactive"></div>
+          <div id="btn-red" class="btn btn-red-inactive"></div>
+        </div>
+        <div>
+          <div id="btn-yellow" class="btn btn-yellow-inactive"></div>
+          <div id="btn-blue" class="btn btn-blue-inactive"></div>
+        </div>
+      </div>
+
+      <!-- Control Panel -->
+      <div id="controls-container" class="middle"></div>
+      <div id="control-panel" class="middle">
+
+        <!-- Title -->
+        <div id="title">Simon</div>
+
+        <!-- LCD -->
+        <div><button id="lcd">00</button></div>
+
+        <!-- Buttons -->
+        <div>
+          <!-- Start Button -->
+          <button id="btn-start">
+            <span id="indicator-start" class="indicator-red-off">&#9899;</span><br/>
+            Start
+          </button>
+
+          <!-- Strict Button -->
+          <button id="btn-strict">
+            <span id="indicator-strict" class="indicator-yellow-off">&#9899;</span><br/>
+            Strict
+          </button>
+        </div>
+
+      </div>
     </div>
-    <!-- End Game Board -->
 
   </body>
 </html>

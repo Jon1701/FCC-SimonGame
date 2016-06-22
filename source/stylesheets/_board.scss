@@ -1,0 +1,84 @@
+// Colours.
+$colour-green-inactive: #00A74A;
+$colour-red-inactive: #9F0F17;
+$colour-yellow-inactive: #CCA707;
+$colour-blue-inactive: #094A8F;
+$colour-green-active: #13FF7C;
+$colour-red-active: #FF4C4C;
+$colour-yellow-active: #FED93F;
+$colour-blue-active: #1C8CFF;
+
+.indicator-red-off { color: $colour-red-inactive; };
+.indicator-red-on { color: $colour-red-active; };
+.indicator-yellow-off { color: $colour-yellow-inactive; };
+.indicator-yellow-on { color: $colour-yellow-active; };
+
+.middle {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#board {
+
+  width: 800px;
+  height: 800px;
+
+  margin: 0 auto;
+  border: solid 1px black;
+
+  .btn {
+    display: table-cell;
+    border: solid 5px #333333;
+
+    width: 400px;
+    height: 400px;
+  }
+
+  #controls-container {
+    width: 425px;
+    height: 425px;
+    background-color: white;
+
+    border: solid 10px #333333;
+    border-radius: 100%;
+  }
+
+  #control-panel {
+
+    text-align: center;
+
+    #title {
+      font-size: 3em;
+    }
+
+    #lcd {
+      background-color: white;
+
+      border: solid 4px #333333;
+      padding: 2px 20px;
+
+      font-family: Courier, monospace;
+      font-size: 3em;
+      color: black;
+
+    }
+
+    #btn-start, #btn-strict {
+      background-color: transparent;
+
+      border: solid 0px #333333;
+      margin: 0;
+      padding: 0;
+      width: 100px;
+      height: 100px;
+
+      font-family: Verdana;
+      font-size: 2em;
+      color: black;
+
+    }
+
+  }
+}

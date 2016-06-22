@@ -1,3 +1,7 @@
+body {
+  font-family: "Verdana";
+}
+
 // Import styles for Board and Control Panel.
-@import "_board.scss";
-@import "_control-panel.scss";
+@import "_board";
+@import "_buttons";

@@ -1,0 +1,27 @@
+
+////////////////////////////////////////////////////////////////////////////////
+// Button Rounded Corners
+////////////////////////////////////////////////////////////////////////////////
+
+#btn-green { border-radius: 100% 0 0 0; };
+#btn-red { border-radius: 0 100% 0 0; };
+#btn-yellow { border-radius: 0 0 0 100%; };
+#btn-blue { border-radius: 0 0 100% 0; }
+
+////////////////////////////////////////////////////////////////////////////////
+// Button Inactive Colour
+////////////////////////////////////////////////////////////////////////////////
+
+.btn-green-inactive { background-color: $colour-green-inactive; };
+.btn-red-inactive { background-color: $colour-red-inactive; };
+.btn-yellow-inactive { background-color: $colour-yellow-inactive; };
+.btn-blue-inactive { background-color: $colour-blue-inactive; }
+
+////////////////////////////////////////////////////////////////////////////////
+// Button Active Colour
+////////////////////////////////////////////////////////////////////////////////
+
+.btn-green-active { background-color: $colour-green-active; };
+.btn-red-active { background-color: $colour-red-active; };
+.btn-yellow-active { background-color: $colour-yellow-active; };
+.btn-blue-active {background-color: $colour-blue-active; };
