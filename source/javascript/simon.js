@@ -72,6 +72,13 @@ $(document).ready(function() {
   }
 
   //////////////////////////////////////////////////////////////////////////////
+  // Sets the LCD value.
+  //////////////////////////////////////////////////////////////////////////////
+  var setLCD = function(text) {
+    $("#lcd").text(text);
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
   // Performs a blink animation on the LCD with a given string of text.
   //////////////////////////////////////////////////////////////////////////////
   var blinkLCD = function(text) {
@@ -121,6 +128,9 @@ $(document).ready(function() {
 
     // Increment current round by 1.
     currentRound++;
+
+    // Update LCD.
+    setLCD(currentRound);
 
     // Possible elements in sequence.
     var CHOICES = ["green", "red", "yellow", "blue"];
@@ -185,6 +195,9 @@ $(document).ready(function() {
       // Allow button presses.
       hideMask();
 
+      // Allow recording user pattern.
+      recordPattern();
+
     });
   }// end playSequence().
 
@@ -217,10 +230,10 @@ $(document).ready(function() {
       hideMask();
 
       // Generate sequence.
-      //generateSequence();
+      generateSequence();
 
       // Play back sequence.
-      //playSequence();
+      playSequence();
 
     }
   });
@@ -282,6 +295,19 @@ $(document).ready(function() {
 
         // Return sequence.
         return deferred.promise();
+      } // end button animations.
+
+
+      // Checks to see if two arrays have the same elements.
+      var arraysEqual = function(arr1, arr2) {
+
+        // Join characters in each array together as strings.
+        arr1String = arr1.join();
+        arr2String = arr2.join();
+
+        // Check if the two strings are the same.
+        return arr1String === arr2String;
+
       }
 
       // Get id of the button pressed.
@@ -290,13 +316,53 @@ $(document).ready(function() {
       // Get the colour of the button pressed.
       var colour = id.split("-").slice(-1)[0];
 
-      // Execute animations.
-      var promise = btnAnimations(this, colour);
+      // Add the colour to the userSequence array.
+      userSequence.push(colour);
+      console.log(userSequence);
 
-      // When actions are done, run this function.
-      promise.done(function() {
-        console.log("button animation done");
-      });
+      // Logic to check user sequence.
+      //
+      // If both sequences match, the next round begins.
+      // If both sequences do not match:
+      //  a) if Strict Mode is disabled, the user is given a chance to try again.
+      //  b) if Strict Mode is enabled, the user is not given a chance to try
+      //     again, and must start from the very beginning (round 1).
+      if (arraysEqual(computerSequence, userSequence)) {
+        console.log("both sequences are the same");
+      } else {
+        console.log("both sequences not the same");
+      }
+
+      /*
+      // Want to record what buttons the user presses.
+      //
+      // Keep accepting button presses until userSequence array length is same
+      // as the current round number.
+      if (userSequence.length != currentRound) {
+
+        // Add the colour to the userSequence array.
+        userSequence.push(colour);
+        console.log(userSequence);
+
+        // Execute animations.
+        var promise = btnAnimations(this, colour);
+
+        // When actions are done, run this function.
+        promise.done();
+
+        if (userSequence.length === currentRound) {
+          console.log(userSequence);
+        }
+
+      } else {
+        console.log("more choices than generated");
+      }
+      */
+
+
+
+
+
     })
   };
 
@@ -312,10 +378,5 @@ $(document).ready(function() {
   computerSequence = [];
   userSequence = [];
   currentRound = 0;
-
-
-
-
-
 
 });
