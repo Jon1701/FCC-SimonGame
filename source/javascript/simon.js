@@ -1,120 +1,6 @@
 $(document).ready(function() {
 
   //////////////////////////////////////////////////////////////////////////////
-  // Hides or shows transparent layer separating the board buttons and the
-  // control panel.
-  //////////////////////////////////////////////////////////////////////////////
-  var showMask = function() { $("#board-mask").show(); };
-  var hideMask = function() { $("#board-mask").hide(); };
-
-  //////////////////////////////////////////////////////////////////////////////
-  // Toggles the boards Start indicator.
-  //////////////////////////////////////////////////////////////////////////////
-  var togglePowerIndicator = function() {
-
-    // Check internal state to see if power is turned on.
-    if (power) {
-
-      // If internal state is on, board indicator is active.
-      $("#btn-start > span").addClass("indicator-red-on");
-      $("#btn-start > span").removeClass("indicator-red-off");
-
-    } else {
-
-      // If internal state is off, board indicator is inactive.
-      $("#btn-start > span").addClass("indicator-red-off");
-      $("#btn-start > span").removeClass("indicator-red-on");
-
-    }
-  }// end togglePowerIndicator().
-
-  //////////////////////////////////////////////////////////////////////////////
-  // Toggles the boards Strict Mode indicator.
-  //////////////////////////////////////////////////////////////////////////////
-  var toggleStrictIndicator = function() {
-
-    // Check internal state to see if Strict Mode is turned on.
-    if (strict) {
-
-      // If Strict Mode is on, board indicator is on.
-      $("#btn-strict > span").addClass("indicator-yellow-on");
-      $("#btn-strict > span").removeClass("indicator-yellow-off");
-
-    } else {
-
-      // If Strict Mode is off, board indicator is off.
-      $("#btn-strict > span").addClass("indicator-yellow-off");
-      $("#btn-strict > span").removeClass("indicator-yellow-on");
-
-    }
-  }// end toggleStrictIndicator()
-
-  //////////////////////////////////////////////////////////////////////////////
-  //
-  //
-  //
-  // *** SHORTHAND DEBUGGING FUNCTIONS ***
-  //
-  //
-  //
-  //////////////////////////////////////////////////////////////////////////////
-  gen = function() {
-    generateSequence();
-  };
-  play = function() {
-    playSequence();
-  };
-  blink = function(x) {
-    blinkLCD(x);
-  }
-  record = function() {
-    recordPattern();
-  }
-
-  //////////////////////////////////////////////////////////////////////////////
-  // Sets the LCD value.
-  //////////////////////////////////////////////////////////////////////////////
-  var setLCD = function(text) {
-    $("#lcd").text(text);
-  }
-
-  //////////////////////////////////////////////////////////////////////////////
-  // Performs a blink animation on the LCD with a given string of text.
-  //////////////////////////////////////////////////////////////////////////////
-  var blinkLCD = function(text, f) {
-
-    // A sequence of actions to be performed.
-    var actions = function() {
-
-      // Create a deferred sequence of actions.
-      var deferred = $.Deferred();
-
-      // Switch between the given string of text and dashes at 700ms intervals.
-      setTimeout(function() { $("#lcd").text(text); }, 700);
-      setTimeout(function() { $("#lcd").text("--"); }, 1400);
-      setTimeout(function() { $("#lcd").text(text); }, 2100);
-      setTimeout(function() { $("#lcd").text("--"); }, 2800);
-      setTimeout(function() { // Final animation, finish at 800ms after previous.
-
-        // Show current round number.
-        $("#lcd").text(currentRound);
-
-        // Deferred actions are done.
-        deferred.resolve();
-      }, 3600);
-
-      // Return sequence.
-      return deferred.promise();
-    }
-
-    // Execute actions.
-    var promise = actions();
-
-    // When actions are done, run this function.
-    promise.done(f);
-  }// end blinkLCD().
-
-  //////////////////////////////////////////////////////////////////////////////
   // Generate an internal sequence of colours which the user will play back.
   // The number of colours is the same as the current round number.
   //////////////////////////////////////////////////////////////////////////////
@@ -144,7 +30,6 @@ $(document).ready(function() {
       computerSequence.push(item);
 
     }// end random selection.
-    console.log("computer: " + computerSequence);
   }// end generateSequence().
 
   //////////////////////////////////////////////////////////////////////////////
@@ -198,73 +83,10 @@ $(document).ready(function() {
   }// end playSequence().
 
   //////////////////////////////////////////////////////////////////////////////
-  // Toggles the Start Indicator and internal power state.
-  //////////////////////////////////////////////////////////////////////////////
-  $("#btn-start").on("click", function() {
-
-    // If internal power state is on, turn the game off.
-    if (power) {
-
-      // Set power to off.
-      power = false;
-
-      // Toggle Indicator.
-      togglePowerIndicator();
-
-      // Prevent button press.
-      showMask();
-
-    } else { // If the internal power state is off, turn the game on.
-
-      // Set power to on.
-      power = true;
-
-      // Toggle Indicator.
-      togglePowerIndicator();
-
-      // Allow button press.
-      hideMask();
-
-      // Generate sequence.
-      generateSequence();
-
-      // Play back sequence.
-      playSequence();
-
-      recordPattern();
-
-    }
-  });
-
-  //////////////////////////////////////////////////////////////////////////////
-  // Toggles the strict button indicator and internal strict mode state.
-  //////////////////////////////////////////////////////////////////////////////
-  $("#btn-strict").on("click", function() {
-
-    // If internal Strict Mode is on, turn it off.
-    if (strict) {
-
-      // Set Strict Mode to off.
-      strict = false;
-
-      // Toggle Indicator.
-      toggleStrictIndicator();
-
-    } else { // If internal Strict Mode is off, turn it on.
-
-      // Set Strict Mode to on.
-      strict = true;
-
-      // Toggle Indicator.
-      toggleStrictIndicator();
-    }
-  });
-
-  //////////////////////////////////////////////////////////////////////////////
-  // Board Button Events
+  // Records the sequence from the user.
   //////////////////////////////////////////////////////////////////////////////
 
-  var recordPattern = function() {
+  var recordSequence = function() {
 
     $(".btn").on("click", function() {
 
@@ -396,6 +218,165 @@ $(document).ready(function() {
       }// end sequence length check.
     }) // end button onclick.
   };
+
+  //////////////////////////////////////////////////////////////////////////////
+  // Hides or shows transparent layer separating the board buttons and the
+  // control panel.
+  //////////////////////////////////////////////////////////////////////////////
+  var showMask = function() { $("#board-mask").show(); };
+  var hideMask = function() { $("#board-mask").hide(); };
+
+
+  //////////////////////////////////////////////////////////////////////////////
+  // Sets the LCD value.
+  //////////////////////////////////////////////////////////////////////////////
+  var setLCD = function(text) {
+    $("#lcd").text(text);
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // Performs a blink animation on the LCD with a given string of text.
+  //////////////////////////////////////////////////////////////////////////////
+  var blinkLCD = function(text, f) {
+
+    // A sequence of actions to be performed.
+    var actions = function() {
+
+      // Create a deferred sequence of actions.
+      var deferred = $.Deferred();
+
+      // Switch between the given string of text and dashes at 700ms intervals.
+      setTimeout(function() { $("#lcd").text(text); }, 700);
+      setTimeout(function() { $("#lcd").text("--"); }, 1400);
+      setTimeout(function() { $("#lcd").text(text); }, 2100);
+      setTimeout(function() { $("#lcd").text("--"); }, 2800);
+      setTimeout(function() { // Final animation, finish at 800ms after previous.
+
+        // Show current round number.
+        $("#lcd").text(currentRound);
+
+        // Deferred actions are done.
+        deferred.resolve();
+      }, 3600);
+
+      // Return sequence.
+      return deferred.promise();
+    }
+
+    // Execute actions.
+    var promise = actions();
+
+    // When actions are done, run this function.
+    promise.done(f);
+  }// end blinkLCD().
+
+  //////////////////////////////////////////////////////////////////////////////
+  // Toggles the boards Start indicator.
+  //////////////////////////////////////////////////////////////////////////////
+  var togglePowerIndicator = function() {
+
+    // Check internal state to see if power is turned on.
+    if (power) {
+
+      // If internal state is on, board indicator is active.
+      $("#btn-start > span").addClass("indicator-start-on");
+      $("#btn-start > span").removeClass("indicator-start-off");
+
+    } else {
+
+      // If internal state is off, board indicator is inactive.
+      $("#btn-start > span").addClass("indicator-start-off");
+      $("#btn-start > span").removeClass("indicator-start-on");
+
+    }
+  }// end togglePowerIndicator().
+
+  //////////////////////////////////////////////////////////////////////////////
+  // Toggles the boards Strict Mode indicator.
+  //////////////////////////////////////////////////////////////////////////////
+  var toggleStrictIndicator = function() {
+
+    // Check internal state to see if Strict Mode is turned on.
+    if (strict) {
+
+      // If Strict Mode is on, board indicator is on.
+      $("#btn-strict > span").addClass("indicator-strict-on");
+      $("#btn-strict > span").removeClass("indicator-strict-off");
+
+    } else {
+
+      // If Strict Mode is off, board indicator is off.
+      $("#btn-strict > span").addClass("indicator-strict-off");
+      $("#btn-strict > span").removeClass("indicator-strict-on");
+
+    }
+  }// end toggleStrictIndicator()
+
+  //////////////////////////////////////////////////////////////////////////////
+  // Toggles the Start Indicator and internal power state.
+  //////////////////////////////////////////////////////////////////////////////
+  $("#btn-start").on("click", function() {
+
+    // If internal power state is on, turn the game off.
+    if (power) {
+
+      // Just refresh the page.
+      location.reload();
+
+      // Set power to off.
+      //power = false;
+
+      // Toggle Indicator.
+      //togglePowerIndicator();
+
+      // Prevent button press.
+      //showMask();
+
+    } else { // If the internal power state is off, turn the game on.
+
+      // Set power to on.
+      power = true;
+
+      // Toggle Indicator.
+      togglePowerIndicator();
+
+      // Allow button press.
+      hideMask();
+
+      // Generate sequence.
+      generateSequence();
+
+      // Play back sequence.
+      playSequence();
+
+      // Records the users button press.
+      recordSequence();
+    }
+  });
+
+  //////////////////////////////////////////////////////////////////////////////
+  // Toggles the strict button indicator and internal strict mode state.
+  //////////////////////////////////////////////////////////////////////////////
+  $("#btn-strict").on("click", function() {
+
+    // If internal Strict Mode is on, turn it off.
+    if (strict) {
+
+      // Set Strict Mode to off.
+      strict = false;
+
+      // Toggle Indicator.
+      toggleStrictIndicator();
+
+    } else { // If internal Strict Mode is off, turn it on.
+
+      // Set Strict Mode to on.
+      strict = true;
+
+      // Toggle Indicator.
+      toggleStrictIndicator();
+    }
+  });
 
   // Global variables.
   var power = false;
