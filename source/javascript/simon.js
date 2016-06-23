@@ -55,6 +55,9 @@ $(document).ready(function() {
         // Sets appropriate active class according to its colour.
         $("#btn-" + colour).addClass("btn-" + colour + "-active");
 
+        // Play audio.
+        playAudio(colour);
+
       }, (index+1)*1200 + 1000*index);
 
       // Button inactive.
@@ -101,6 +104,9 @@ $(document).ready(function() {
 
           //Add its appropriate active class.
           $(btn).addClass("btn-" + colour + "-active");
+
+          // Play audio.
+          playAudio(colour);
 
         }, 0);
 
@@ -220,12 +226,28 @@ $(document).ready(function() {
   };
 
   //////////////////////////////////////////////////////////////////////////////
+  // Play audio file based on colour.
+  //////////////////////////////////////////////////////////////////////////////
+  var playAudio = function(colour) {
+
+    // Play file based on colour.
+    if (colour === "green") {
+      $("#simon-audio1").trigger("play");
+    } else if (colour === "red") {
+      $("#simon-audio2").trigger("play");
+    } else if (colour === "yellow") {
+      $("#simon-audio3").trigger("play");
+    } else {
+      $("#simon-audio4").trigger("play");
+    }
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
   // Hides or shows transparent layer separating the board buttons and the
   // control panel.
   //////////////////////////////////////////////////////////////////////////////
   var showMask = function() { $("#board-mask").show(); };
   var hideMask = function() { $("#board-mask").hide(); };
-
 
   //////////////////////////////////////////////////////////////////////////////
   // Sets the LCD value.
@@ -323,15 +345,6 @@ $(document).ready(function() {
       // Just refresh the page.
       location.reload();
 
-      // Set power to off.
-      //power = false;
-
-      // Toggle Indicator.
-      //togglePowerIndicator();
-
-      // Prevent button press.
-      //showMask();
-
     } else { // If the internal power state is off, turn the game on.
 
       // Set power to on.
@@ -384,5 +397,11 @@ $(document).ready(function() {
   var computerSequence = [];
   var userSequence = [];
   var currentRound = 0;
+
+  // Audio files.
+  var simonSound1 = new Audio("../media/sounds/simonSound1.mp3");
+  var simonSound2 = new Audio("../media/sounds/simonSound2.mp3");
+  var simonSound3 = new Audio("../media/sounds/simonSound3.mp3");
+  var simonSound4 = new Audio("../media/sounds/simonSound4.mp3");
 
 });
