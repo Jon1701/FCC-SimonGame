@@ -24,6 +24,12 @@ gulp.task("javascript", function() {
     .pipe(gulp.dest(destPath + "javascript/"));
 });
 
+// Move media.
+gulp.task("media", function() {
+  gulp.src(srcPath + "media/**/*")
+    .pipe(gulp.dest(destPath + "media/"));
+});
+
 // Compile and move stylesheets.
 gulp.task("stylesheets", function() {
   gulp.src(srcPath + "stylesheets/**/*")
@@ -64,6 +70,7 @@ gulp.task("webserver", function() {
 // Watch task
 gulp.task("watch", function() {
   gulp.watch(srcPath + "javascript/**/*", ["javascript"]); // JavaScript.
+  gulp.watch(srcPath + "media/**/*", ["media"]); // JavaScript.
   gulp.watch(srcPath + "stylesheets/**/*.scss", ["stylesheets"]); // SASS Main.
   gulp.watch(srcPath + "stylesheets/**/_*.scss", ["stylesheets"]); // SASS Partials.
   gulp.watch(srcPath + "*.html", ["html"]); // HTML files.
@@ -72,4 +79,4 @@ gulp.task("watch", function() {
 ////////////////////////////////////////////////////////////////////////////////
 // Default Task.
 ////////////////////////////////////////////////////////////////////////////////
-gulp.task("default", ["javascript", "stylesheets", "html", "components", "watch", "webserver"]);
+gulp.task("default", ["javascript", "media", "stylesheets", "html", "components", "watch", "webserver"]);
