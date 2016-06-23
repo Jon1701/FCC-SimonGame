@@ -11,14 +11,41 @@ $colour-red-active: #FF4C4C;
 $colour-yellow-active: #FED93F;
 $colour-blue-active: #1C8CFF;
 
+$color-lightgrey: #ECE7EE;
+
+////////////////////////////////////////////////////////////////////////////////
+// Move element to center of the screen.
+////////////////////////////////////////////////////////////////////////////////
+.middle {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Disable Text Selection.
+////////////////////////////////////////////////////////////////////////////////
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Main
 ////////////////////////////////////////////////////////////////////////////////
+
+// Colours.
+$bg-color: #34495E;
+
 body {
   font-family: "Verdana";
-
-  background-color: #34495e;
-  background-size: cover;
+  background-color: $bg-color;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -26,3 +53,4 @@ body {
 ////////////////////////////////////////////////////////////////////////////////
 @import "_board";
 @import "_buttons";
+@import "_control-panel";

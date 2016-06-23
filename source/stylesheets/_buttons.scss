@@ -1,13 +1,4 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Game Button Rounded Corners
-////////////////////////////////////////////////////////////////////////////////
-
-#btn-green { border-radius: 100% 0 0 0; };
-#btn-red { border-radius: 0 100% 0 0; };
-#btn-yellow { border-radius: 0 0 0 100%; };
-#btn-blue { border-radius: 0 0 100% 0; }
-
-////////////////////////////////////////////////////////////////////////////////
 // Game Button Inactive Colour
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -29,7 +20,40 @@
 // Indicator buttons for Power/Start and Strict Mode.
 ////////////////////////////////////////////////////////////////////////////////
 
-.indicator-red-off { color: $colour-red-inactive; };
-.indicator-red-on { color: $colour-red-active; };
-.indicator-yellow-off { color: $colour-yellow-inactive; };
-.indicator-yellow-on { color: $colour-yellow-active; };
+.indicator-start-off { color: black; };
+.indicator-start-on { color: #DC143C; };
+.indicator-strict-off { color:black; };
+.indicator-strict-on { color: #DC143C; };
+
+////////////////////////////////////////////////////////////////////////////////
+// Corners
+////////////////////////////////////////////////////////////////////////////////
+
+.corner-round-topleft { border-radius: 100% 0 0 0; };
+.corner-round-topright { border-radius: 0 100% 0 0; };
+.corner-round-bottomleft { border-radius: 0 0 0 100%; };
+.corner-round-bottomright { border-radius: 0 0 100% 0; };
+
+////////////////////////////////////////////////////////////////////////////////
+// Border colours for matching corners.
+////////////////////////////////////////////////////////////////////////////////
+
+.border-green {
+  border-left: solid 5px $colour-green-active;
+  border-top: solid 5px $colour-green-active;
+}
+
+.border-red {
+  border-top: solid 5px $colour-red-active;
+  border-right: solid 5px $colour-red-active;
+}
+
+.border-yellow {
+  border-left: solid 5px $colour-yellow-active;
+  border-bottom: solid 5px $colour-yellow-active;
+}
+
+.border-blue {
+  border-right: solid 5px $colour-blue-active;
+  border-bottom: solid 5px $colour-blue-active;
+}
