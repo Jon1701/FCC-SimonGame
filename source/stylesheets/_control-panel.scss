@@ -33,6 +33,7 @@
     background-color: white;
     border: solid 4px #333333;
     border-radius: 5%;
+    outline: none;
 
     width: 125px;
 
@@ -44,7 +45,8 @@
   // Control Panel Start/Strict Buttons.
   #btn-start, #btn-strict {
     background-color: transparent;
-    border: 0;
+    border: none;
+    outline: none;
 
     //border: solid 1px #333333;
     margin: 0;
@@ -59,7 +61,7 @@
 
     // Icon Size.
     span {
-      font-size: 2em;
+      font-size: 1.5em;
       line-height: 0px;
     };
   }
