@@ -42,28 +42,16 @@
         </div>
       </div>
 
-      <!-- Inner Donut Border -->
-      <div id="board-buttons-inner-donut" class="middle">
-        <div>
-          <div class="corner-round-topleft border-green btn"></div>
-          <div class="corner-round-topright border-red btn"></div>
-        </div>
-        <div>
-          <div class="corner-round-bottomleft border-yellow btn"></div>
-          <div class="corner-round-bottomright border-blue btn"></div>
-        </div>
-      </div>
-
       <!-- Mask to prevent button press -->
-      <div id="board-mask"></div>
+      <div id="board-mask" class="middle"></div>
 
-      <!-- Control Panel Outer Donut -->
-      <div id="control-panel-outer-donut" class="middle"></div>
+
+      <div id="control-panel-bg" class="middle"></div>
+
 
       <!-- Control Panel -->
       <div id="control-panel" class="middle">
 
-        <!-- Title -->
         <div id="title">Simon</div>
 
         <!-- LCD -->
@@ -73,18 +61,20 @@
         <div>
           <!-- Start Button -->
           <button id="btn-start">
-            <span id="indicator-start" class="indicator-red-off">&#9673;</span><br/>
-            Start
+            <span id="indicator-start" class="indicator-symbol indicator-red-off">&#9673;</span><br/>
+            <span class="indicator-name">Start</span>
           </button>
 
           <!-- Strict Button -->
           <button id="btn-strict">
-            <span id="indicator-strict" class="indicator-yellow-off">&#9673;</span><br/>
-            Strict
+            <span id="indicator-strict" class="indicator-symbol indicator-yellow-off">&#9673;</span><br/>
+            <span class="indicator-name">Strict</span>
           </button>
         </div>
 
       </div>
+
+
     </div>
 
   </body>

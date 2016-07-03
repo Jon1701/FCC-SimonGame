@@ -2,31 +2,30 @@
 // Control Panel outer donut section.
 // Shows a circular border behind the control panel.
 ////////////////////////////////////////////////////////////////////////////////
-#control-panel-outer-donut {
 
-  // Dimensions.
-  width: 380px;
-  height: 380px;
+#control-panel-bg {
+  position: absolute;
 
   // Colours.
   background-color: $color-lightgrey;
   border: solid 5px $bg-color;
   border-radius: 100%;
-
 }
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Control Panel
 ////////////////////////////////////////////////////////////////////////////////
 #control-panel {
+
+  position: absolute;
   font-family: 'Share Tech Mono', monospace;
   background-color: none;
 
+  #title { font-size: 1.5em };
+
   // Align center.
   text-align: center;
-
-  // Game Name.
-  #title { font-size: 4.5em; }
 
   // LCD Display.
   #lcd {
@@ -35,10 +34,7 @@
     border-radius: 5%;
     outline: none;
 
-    width: 125px;
-
     font-family: 'Share Tech Mono', monospace;
-    font-size: 3em;
     color: black;
   }
 
@@ -47,22 +43,21 @@
     background-color: transparent;
     border: none;
     outline: none;
+    text-align: center;
 
     //border: solid 1px #333333;
     margin: 0;
     padding: 0;
-    width: 100px;
-    height: 125px;
+
 
     // Button Text Font.
     font-family: 'Oswald', sans-serif;
-    font-size: 2em;
     color: black;
 
     // Icon Size.
     span {
-      font-size: 1.5em;
-      line-height: 0px;
+      line-height: 15px;
+      font-size: 1em;
     };
   }
 
