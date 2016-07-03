@@ -1,0 +1,25 @@
+////////////////////////////////////////////////////////////////////////////////
+// Special classes.
+////////////////////////////////////////////////////////////////////////////////
+
+// Middle of screen (vertical and horizontal).
+.middle {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+};
+
+// Lets clicks pass though this element.
+.clickthrough { pointer-events: none; };
+
+// Disable Text Selection.
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}

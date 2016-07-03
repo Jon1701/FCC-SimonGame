@@ -1,0 +1,56 @@
+////////////////////////////////////////////////////////////////////////////////
+// Control Panel
+////////////////////////////////////////////////////////////////////////////////
+
+#control-panel {
+  width: calc(55% - 20px);
+  height: calc(55% - 20px);
+  background-color: $color-lightgrey;
+  border: solid 5px $bg-color;
+
+  border-radius: 100%;
+}
+
+#control-panel-widgets {
+  text-align: center;
+  width: 100%;
+
+  #title {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13vmin;
+  }
+
+  #lcd {
+    width: 45%;
+    background-color: white;
+    border: solid 4px #333333;
+    border-radius: 5%;
+    outline: none;
+
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 5vmin;
+    color: black;
+  }
+
+  #btn-start, #btn-strict {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    text-align: center;
+
+    //border: solid 1px #333333;
+    margin: 0;
+    padding: 0;
+
+    // Button Text Font.
+    font-family: "Oswald", sans-serif;
+    color: black;
+
+    // Icon Size and spacing.
+    .indicator-symbol { font-size: 10vmin; };
+    .indicator-name { font-size: 3vmin; };
+    span { line-height: 4vmin; };
+
+  }
+
+}
