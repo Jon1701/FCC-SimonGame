@@ -5,9 +5,6 @@
     <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Oswald|Share+Tech+Mono" rel="stylesheet"/>
-
     <!-- Application Stylesheet -->
     <link rel="stylesheet" href="stylesheets/stylesheet.css"/>
 
@@ -31,46 +28,50 @@
     <div id="board" class="middle noselect">
 
       <!-- Board Buttons -->
-      <div id="board-buttons">
-        <div>
-          <div id="btn-green" class="corner-round-topleft border-green btn btn-green-inactive"></div>
-          <div id="btn-red" class="corner-round-topright border-red btn btn-red-inactive"></div>
-        </div>
-        <div>
-          <div id="btn-yellow" class="corner-round-bottomleft border-yellow btn btn-yellow-inactive"></div>
-          <div id="btn-blue" class="corner-round-bottomright border-blue btn btn-blue-inactive"></div>
-        </div>
+      <div id="board-buttons-outer">
+        <div id="btn-green" class="corner-round-topleft border-green btn btn-outer btn-green-inactive"></div>
+        <div id="btn-red" class="corner-round-topright border-red btn btn-outer btn-red-inactive"></div>
+        <div id="btn-yellow" class="corner-round-bottomleft border-yellow btn btn-outer btn-yellow-inactive"></div>
+        <div id="btn-blue" class="corner-round-bottomright border-blue btn btn-outer btn-blue-inactive"></div>
+      </div>
+
+      <div id="board-buttons-inner" class="middle clickthrough">
+        <div id="btn-green-inner" class="corner-round-topleft border-green btn btn-outer btn-green-inactive"></div>
+        <div id="btn-red-inner" class="corner-round-topright border-red btn btn-outer btn-red-inactive"></div>
+        <div id="btn-yellow-inner" class="corner-round-bottomleft border-yellow btn btn-outer btn-yellow-inactive"></div>
+        <div id="btn-blue-inner" class="corner-round-bottomright border-blue btn btn-outer btn-blue-inactive"></div>
       </div>
 
       <!-- Mask to prevent button press -->
       <div id="board-mask" class="middle"></div>
 
-
-      <div id="control-panel-bg" class="middle"></div>
-
-
       <!-- Control Panel -->
       <div id="control-panel" class="middle">
 
-        <div id="title">Simon</div>
+        <div id="control-panel-widgets" class="middle">
 
-        <!-- LCD -->
-        <div><button id="lcd">--</button></div>
+          <!-- Game Title -->
+          <div id="title">Simon</div>
 
-        <!-- Buttons -->
+          <!-- LCD -->
+          <div><button id="lcd">--</button></div>
+
+          <!-- Buttons -->
+          <div>
+            <!-- Start Button -->
+            <button id="btn-start">
+              <span id="indicator-start" class="indicator-symbol indicator-red-off">&#9673;</span><br/>
+              <span class="indicator-name">Start</span>
+            </button>
+
+            <!-- Strict Button -->
+            <button id="btn-strict">
+              <span id="indicator-strict" class="indicator-symbol indicator-yellow-off">&#9673;</span><br/>
+              <span class="indicator-name">Strict</span>
+            </button>
+          </div>
+
         <div>
-          <!-- Start Button -->
-          <button id="btn-start">
-            <span id="indicator-start" class="indicator-symbol indicator-red-off">&#9673;</span><br/>
-            <span class="indicator-name">Start</span>
-          </button>
-
-          <!-- Strict Button -->
-          <button id="btn-strict">
-            <span id="indicator-strict" class="indicator-symbol indicator-yellow-off">&#9673;</span><br/>
-            <span class="indicator-name">Strict</span>
-          </button>
-        </div>
 
       </div>
 
