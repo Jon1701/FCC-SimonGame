@@ -5,7 +5,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 var gulp = require("gulp");
 var sass = require("gulp-sass");
-var webserver = require('gulp-webserver');
+var webserver = require("gulp-webserver");
+var uglify = require("gulp-uglify");
 
 ////////////////////////////////////////////////////////////////////////////////
 // Paths
@@ -21,6 +22,7 @@ var modulesPath = "./node_modules/";
 // Move JavaScript.
 gulp.task("javascript", function() {
   gulp.src(srcPath + "javascript/**/*")
+    .pipe(uglify())
     .pipe(gulp.dest(destPath + "javascript/"));
 });
 
@@ -33,7 +35,7 @@ gulp.task("media", function() {
 // Compile and move stylesheets.
 gulp.task("stylesheets", function() {
   gulp.src(srcPath + "stylesheets/**/*")
-    .pipe(sass().on("error", sass.logError))
+    .pipe(sass({outputStyle: 'compressed'}).on("error", sass.logError))
     .pipe(gulp.dest(destPath + "stylesheets/"));
 });
 
@@ -48,6 +50,7 @@ gulp.task("components", function() {
 
   // jQuery.
   gulp.src(modulesPath + "jquery/dist/jquery.js")
+    .pipe(uglify())
     .pipe(gulp.dest(destPath + "components/jquery/"));
 
 });
